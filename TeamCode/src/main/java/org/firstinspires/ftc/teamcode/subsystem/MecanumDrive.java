@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.subsystem;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.Constants;
+
 public class MecanumDrive {
 
     private DcMotor leftFront;
@@ -18,10 +20,10 @@ public class MecanumDrive {
     public void init(HardwareMap hwMap) {
         this.hwMap = hwMap;
 
-        this.leftFront = this.hwMap.get(DcMotor.class, "leftFront");
-        this.leftBack = this.hwMap.get(DcMotor.class, "leftBack");
-        this.rightFront = this.hwMap.get(DcMotor.class, "rightFront");
-        this.rightBack = this.hwMap.get(DcMotor.class, "rightBack");
+        this.leftFront = this.hwMap.get(DcMotor.class, Constants.MecanumDrive.leftFront);
+        this.leftBack = this.hwMap.get(DcMotor.class, Constants.MecanumDrive.leftBack);
+        this.rightFront = this.hwMap.get(DcMotor.class, Constants.MecanumDrive.rightFront);
+        this.rightBack = this.hwMap.get(DcMotor.class, Constants.MecanumDrive.rightBack);
 
         this.leftFront.setDirection(DcMotor.Direction.FORWARD);
         this.leftBack.setDirection(DcMotor.Direction.FORWARD);

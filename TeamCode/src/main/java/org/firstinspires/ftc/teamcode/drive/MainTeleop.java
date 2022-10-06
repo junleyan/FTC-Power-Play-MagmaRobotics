@@ -19,7 +19,7 @@ public class MainTeleop extends OpMode {
     @Override
     public void init() {
         this.drive.init(hardwareMap);
-
+        this.lift.init(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
     }
@@ -27,7 +27,6 @@ public class MainTeleop extends OpMode {
 
     @Override
     public void loop() {
-
 
         if (gamepad1.a) {
             lift.up();
