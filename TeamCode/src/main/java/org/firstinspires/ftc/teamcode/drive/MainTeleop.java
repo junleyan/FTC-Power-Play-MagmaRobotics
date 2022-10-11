@@ -5,8 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.subsystem.Claws;
 import org.firstinspires.ftc.teamcode.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
+import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
 
 
 @TeleOp(name="Test Teleop", group="OpMode")
@@ -14,12 +16,16 @@ public class MainTeleop extends OpMode {
 
     private MecanumDrive drive = new MecanumDrive();
     private Lift lift = new Lift();
+    private Claws claws = new Claws();
+    private SensorGroup sensor = new SensorGroup();
 
 
     @Override
     public void init() {
         this.drive.init(hardwareMap);
         this.lift.init(hardwareMap);
+        this.claws.init(hardwareMap);
+        this.sensor.init(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
     }
@@ -28,16 +34,11 @@ public class MainTeleop extends OpMode {
     @Override
     public void loop() {
 
-        if (gamepad1.a) {
-            lift.up();
-        } else if(gamepad1.b) {
-            lift.down();
-        } else {
-            lift.stop();
-        }
-        this.drive.set(gamepad1.left_stick_y, gamepad1.right_stick_y);
+        this.drive.setControl(gamepad1);
+        this.lift.setControl(gamepad1);
+        this.claws.setControl(gamepad1);
 
-        telemetry.addData("Status", "Initialized");
+        telemetry.addData("Distance", this.sensor.getDistance());
 
     }
 

@@ -13,4 +13,12 @@ public class Constants {
         public static final String deviceName = "lift";
         public static final double power = 1.0;
     }
+
+    public final class Claws {
+        public static final String deviceName = "claws";
+    }
+
+    public final class SensorGroup {
+        public static final String distanceSensor = "distance";
+    }
 }
