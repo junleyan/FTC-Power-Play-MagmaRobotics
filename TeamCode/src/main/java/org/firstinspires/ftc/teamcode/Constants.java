@@ -20,5 +20,6 @@ public class Constants {
 
     public final class SensorGroup {
         public static final String distanceSensor = "distance";
+        public static final String colorSensor = "color";
     }
 }
