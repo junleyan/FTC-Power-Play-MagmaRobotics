@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
@@ -25,9 +26,9 @@ public class MecanumDrive {
         this.rightFront = hwMap.get(DcMotor.class, Constants.MecanumDrive.rightFront);
         this.rightBack = hwMap.get(DcMotor.class, Constants.MecanumDrive.rightBack);
 
-        this.leftFront.setDirection(DcMotor.Direction.FORWARD);
+        this.leftFront.setDirection(DcMotor.Direction.REVERSE);
         this.leftBack.setDirection(DcMotor.Direction.FORWARD);
-        this.rightFront.setDirection(DcMotor.Direction.REVERSE);
+        this.rightFront.setDirection(DcMotor.Direction.FORWARD);
         this.rightBack.setDirection(DcMotor.Direction.REVERSE);
 
     }
@@ -50,7 +51,7 @@ public class MecanumDrive {
 
     // controller logic
     public void setControl(Gamepad gamepad) {
-        if (!gamepad.left_bumper) {
+        if (gamepad.left_bumper) {
             this.setStrafe(gamepad.left_stick_y, gamepad.right_stick_y);
         } else {
             this.setNormal(gamepad.left_stick_y, gamepad.right_stick_y);
