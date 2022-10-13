@@ -35,11 +35,11 @@ public class MainTeleop extends OpMode {
     public void loop() {
 
         this.drive.setControl(gamepad1);
-        this.lift.setControl(gamepad1);
-        this.claws.setControl(gamepad1);
+        this.lift.setControl(gamepad2);
+        this.claws.setControl(gamepad2);
 
         telemetry.addData("Distance", this.sensor.getDistance());
-
+        telemetry.addData("Color", this.sensor.getRed());
     }
 
     @Override
