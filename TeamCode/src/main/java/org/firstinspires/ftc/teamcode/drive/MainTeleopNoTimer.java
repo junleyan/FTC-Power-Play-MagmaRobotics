@@ -11,10 +11,11 @@ import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
 
 
-@TeleOp(name="Main Teleop Mode (No Timer)", group="OpMode")
+@TeleOp(name="Main Teleop Mode: No Timer", group="OpMode")
 public class MainTeleopNoTimer extends OpMode {
 
 
+    private ElapsedTime runtime = new ElapsedTime();
     private MecanumDrive drive = new MecanumDrive();
     private Lift lift = new Lift();
     private Claw claw = new Claw();
@@ -23,6 +24,11 @@ public class MainTeleopNoTimer extends OpMode {
 
     @Override
     public void init() {
+        drive.init(hardwareMap);
+        lift.init(hardwareMap);
+        claw.init(hardwareMap);
+        sensor.init(hardwareMap);
+
         telemetry.addData("Status", "Initialized");
     }
 
@@ -34,8 +40,11 @@ public class MainTeleopNoTimer extends OpMode {
         this.claw.setControl(gamepad2);
 
         telemetry.addData("Status", "Enabled");
+        telemetry.addData("Time Elapsed", this.runtime.seconds());
         telemetry.addData("Distance", this.sensor.getDistance());
-        telemetry.addData("Color", this.sensor.getRed());
+        telemetry.addData("Color Red", this.sensor.getRed());
+        telemetry.addData("Color Green", this.sensor.getGreen());
+        telemetry.addData("Color Blue", this.sensor.getBlue());
     }
 
 

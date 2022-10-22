@@ -49,7 +49,7 @@ public class MecanumDrive {
         this.leftFront.setPower(-leftPower);
         this.leftBack.setPower(leftPower);
         this.rightFront.setPower(rightPower);
-        this.rightBack.setPower(-rightPower);
+        this.rightBack.setPower(rightPower);
     }
 
 
@@ -57,7 +57,7 @@ public class MecanumDrive {
     public void setFixedStrafe() {
         this.leftFront.setPower(-Constants.MecanumDrive.strafePower);
         this.leftBack.setPower(Constants.MecanumDrive.strafePower);
-        this.rightFront.setPower(Constants.MecanumDrive.strafePower);
+        this.rightFront.setPower(-Constants.MecanumDrive.strafePower);
         this.rightBack.setPower(-Constants.MecanumDrive.strafePower);
     }
 
@@ -65,7 +65,9 @@ public class MecanumDrive {
     // controller logic
     public void setControl(Gamepad gamepad) {
         if (gamepad.left_bumper) {
-            this.setStrafe(gamepad.left_stick_y, gamepad.right_stick_y);
+            this.setStrafe(-0.5, -0.5);
+        } else if (gamepad.right_bumper) {
+            this.setStrafe(0.5, 0.5);
         } else {
             this.setNormal(gamepad.left_stick_y, gamepad.right_stick_y);
         }
