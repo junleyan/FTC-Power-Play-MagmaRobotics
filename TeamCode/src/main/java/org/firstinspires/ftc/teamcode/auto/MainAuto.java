@@ -25,18 +25,12 @@ public class MainAuto extends LinearOpMode {
         sensor.init(hardwareMap);
 
         waitForStart();
-        while (true){
-        while (opModeIsActive() && (runtime.seconds() < 3.0)) {
-            drive.setNormal(power, power);
-        }
-        runtime.reset();
 
-        if (sensor.getDistance() < 10.0) {
-            while (opModeIsActive() && (runtime.seconds() < 2.0)) {
-                drive.setNormal(power, -power);
-            }
-            runtime.reset();
-        }}
+        while (opModeIsActive() && (runtime.seconds() <= 3.0)) {
+            drive.setStrafe(0.5, 0.5);
+        }
+        drive.stop();
+        runtime.reset();
     }
 
 

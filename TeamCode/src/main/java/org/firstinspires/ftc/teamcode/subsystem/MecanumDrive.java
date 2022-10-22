@@ -62,6 +62,13 @@ public class MecanumDrive {
         this.rightBack.setPower(-Constants.MecanumDrive.strafePower);
     }
 
+    public void stop() {
+        this.leftFront.setPower(0);
+        this.leftBack.setPower(0);
+        this.rightFront.setPower(0);
+        this.rightBack.setPower(0);
+    }
+
 
     // controller logic
     public void setControl(Gamepad gamepad) {
