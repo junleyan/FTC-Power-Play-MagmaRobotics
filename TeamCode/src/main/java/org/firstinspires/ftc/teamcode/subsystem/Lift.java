@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -10,7 +11,8 @@ import org.firstinspires.ftc.teamcode.Constants;
 public class Lift {
 
 
-    private DcMotor lift;
+    private DcMotor liftLeft;
+    private DcMotor liftRight;
 
 
     // initialization
@@ -19,26 +21,31 @@ public class Lift {
     }
 
     public void init(HardwareMap hwMap) {
-        this.lift = hwMap.get(DcMotor.class, Constants.Lift.deviceName);
-        this.lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.liftLeft = hwMap.get(DcMotor.class, Constants.Lift.liftLeft);
+        this.liftRight = hwMap.get(DcMotor.class, Constants.Lift.liftRight);
+        this.liftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.liftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
 
     // lift goes up
     public void up() {
-        this.lift.setPower(Constants.Lift.power);
+        this.liftLeft.setPower(Constants.Lift.powerUp);
+        this.liftRight.setPower(-Constants.Lift.powerUp);
     }
 
 
     // lift goes down
     public void down() {
-        this.lift.setPower(-Constants.Lift.power);
+        this.liftLeft.setPower(-Constants.Lift.powerDown);
+        this.liftRight.setPower(Constants.Lift.powerDown);
     }
 
 
     // lift stops and brakes
     public void stop() {
-        this.lift.setPower(0.0);
+        this.liftLeft.setPower(0.0);
+        this.liftRight.setPower(0.0);
     }
 
 

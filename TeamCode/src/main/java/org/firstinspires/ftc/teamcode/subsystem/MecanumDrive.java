@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystem;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -29,17 +30,17 @@ public class MecanumDrive {
         this.rightBack = hwMap.get(DcMotor.class, Constants.MecanumDrive.rightBack);
 
         this.leftFront.setDirection(DcMotor.Direction.REVERSE);
-        this.leftBack.setDirection(DcMotor.Direction.FORWARD);
+        this.leftBack.setDirection(DcMotor.Direction.REVERSE);
         this.rightFront.setDirection(DcMotor.Direction.FORWARD);
-        this.rightBack.setDirection(DcMotor.Direction.REVERSE);
+        this.rightBack.setDirection(DcMotor.Direction.FORWARD);
     }
 
 
     // normal drive
     public void setNormal(double leftPower, double rightPower) {
-        this.leftFront.setPower(-leftPower);
-        this.leftBack.setPower(-leftPower);
-        this.rightFront.setPower(-rightPower);
+        this.leftFront.setPower(leftPower);
+        this.leftBack.setPower(leftPower);
+        this.rightFront.setPower(rightPower);
         this.rightBack.setPower(rightPower);
     }
 

@@ -10,7 +10,8 @@ import org.firstinspires.ftc.teamcode.Constants;
 public class Claw {
 
 
-    private Servo claws;
+    private Servo clawLeft;
+    private Servo clawRight;
 
 
     // initialization
@@ -19,20 +20,22 @@ public class Claw {
     }
 
     public void init(HardwareMap hwMap) {
-        this.claws = hwMap.get(Servo.class, Constants.Claw.deviceName);
-
+        this.clawLeft = hwMap.get(Servo.class, Constants.Claw.clawLeft);
+        this.clawRight = hwMap.get(Servo.class, Constants.Claw.clawRight);
     }
 
 
     // open claws
     public void open() {
-        this.claws.setPosition(1);
+        this.clawLeft.setPosition(1);
+        this.clawRight.setPosition(-1);
     }
 
 
     // close claws
     public void close() {
-        this.claws.setPosition(-1);
+        this.clawLeft.setPosition(-1);
+        this.clawRight.setPosition(1);
     }
 
 

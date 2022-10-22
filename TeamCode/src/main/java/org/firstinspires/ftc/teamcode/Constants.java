@@ -15,14 +15,17 @@ public class Constants {
 
 
     public static final class Lift {
-        public static final String deviceName = "lift";
+        public static final String liftLeft = "liftLeft";
+        public static final String liftRight = "liftRight";
 
-        public static final double power = 1.0;
+        public static final double powerUp = 1;
+        public static final double powerDown = 0.25;
     }
 
 
     public static final class Claw {
-        public static final String deviceName = "claw";
+        public static final String clawLeft = "clawLeft";
+        public static final String clawRight = "clawRight";
     }
 
 
