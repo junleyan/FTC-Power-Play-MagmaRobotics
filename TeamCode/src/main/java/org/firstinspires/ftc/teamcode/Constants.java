@@ -11,6 +11,7 @@ public class Constants {
         public static final String rightBack = "rightBack";
 
         public static final double strafePower = 0.5;
+        public static final double powerMultiplier = 0.75;
     }
 
 
