@@ -73,8 +73,11 @@ public class MecanumDrive {
     // controller logic
     public void setControl(Gamepad gamepad) {
         if (gamepad.left_bumper) {
-            this.setStrafe(gamepad.left_stick_y, gamepad.right_stick_y);
-        } else {
+            this.setStrafe(-0.5, -0.5);
+        } else if (gamepad.right_bumper) {
+            this.setStrafe(0.5, 0.5);
+        }
+        else {
             this.setNormal(gamepad.left_stick_y, gamepad.right_stick_y);
         }
     }
