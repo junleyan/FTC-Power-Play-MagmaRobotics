@@ -43,9 +43,12 @@ public class MainTeleop extends OpMode {
             telemetry.addData("Status", "Enabled");
             telemetry.addData("Time Remaining", this.runtime.seconds());
             telemetry.addData("Distance", this.sensor.getDistance());
+            telemetry.addData("Detected Zone", this.sensor.getZone());
             telemetry.addData("Color Red", this.sensor.getRed());
             telemetry.addData("Color Green", this.sensor.getGreen());
             telemetry.addData("Color Blue", this.sensor.getBlue());
+        } else {
+            this.drive.stop();
         }
     }
 

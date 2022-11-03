@@ -45,6 +45,15 @@ public class SensorGroup {
         return this.color.green();
     }
 
+    public int getZone() {
+        if (this.getGreen() > (this.getRed()+this.getBlue()) * 0.75) {
+            return 3;
+        }
+        if (this.getBlue() > (this.getRed()+this.getGreen()) * 0.75) {
+            return 2;
+        }
+        return 1;
+    }
 
 
 }
