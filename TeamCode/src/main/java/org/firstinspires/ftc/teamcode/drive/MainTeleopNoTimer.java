@@ -39,7 +39,6 @@ public class MainTeleopNoTimer extends OpMode {
         this.claw.setControl(gamepad2);
 
         telemetry.addData("Status", "Enabled");
-        telemetry.addData("Distance", this.sensor.getDistance());
         telemetry.addData("Detected Zone", this.sensor.getZone());
         telemetry.addData("Color Red", this.sensor.getRed());
         telemetry.addData("Color Green", this.sensor.getGreen());

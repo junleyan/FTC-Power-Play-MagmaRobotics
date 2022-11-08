@@ -24,36 +24,28 @@ public class SignalSleevePark extends LinearOpMode {
         sensor.init(hardwareMap);
 
         waitForStart();
-        runtime.reset();
 
         drive.setNormal(0.3,0.3);
-        while (opModeIsActive() && (sensor.getDistance() <= 3)){
+        while (opModeIsActive()){
             telemetry.addData("Task","Moving forward until close to sleeve");
+            if (!(sensor.getZone() == 0)) {
+                scheduled_zone = sensor.getZone();
+            }
         }
         drive.stop();
 
 
-        scheduled_zone = sensor.getZone();
-        if (scheduled_zone == 1) {
-            runtime.reset();
-            drive.setStrafe(-0.5, -0.5);
-            while (opModeIsActive() && (runtime.milliseconds() <= 2000)){
-                telemetry.addData("Task","Moving toward the left");
-            }
-            drive.stop();
-        } else if (scheduled_zone == 3) {
-            runtime.reset();
-            drive.setStrafe(0.5, 0.5);
-            while (opModeIsActive() && (runtime.milliseconds() <= 2000)){
-                telemetry.addData("Task","Moving toward the right");
-            }
-            drive.stop();
+        runtime.reset();
+        while ((scheduled_zone == 1) && (runtime.milliseconds() < 3000)) {
+            drive.setStrafe(-0.3, -0.3);
+            telemetry.addData("Task","Moving toward the left");
         }
+        drive.stop();
 
         runtime.reset();
-        drive.setNormal(0.5, 0.5);
-        while (opModeIsActive() && (runtime.milliseconds() <= 2000)){
-            telemetry.addData("Task","Moving forward");
+        while ((scheduled_zone == 3) && (runtime.milliseconds() < 3000)) {
+            drive.setStrafe(0.3, 0.3);
+            telemetry.addData("Task","Moving forward the right");
         }
         drive.stop();
 
