@@ -23,6 +23,11 @@ public class MainTeleopNoTimer extends OpMode {
 
     @Override
     public void init() {
+        drive.init(hardwareMap);
+        lift.init(hardwareMap);
+        claw.init(hardwareMap);
+        sensor.init(hardwareMap);
+
         telemetry.addData("Status", "Initialized");
     }
 
@@ -35,7 +40,10 @@ public class MainTeleopNoTimer extends OpMode {
 
         telemetry.addData("Status", "Enabled");
         telemetry.addData("Distance", this.sensor.getDistance());
-        telemetry.addData("Color", this.sensor.getRed());
+        telemetry.addData("Detected Zone", this.sensor.getZone());
+        telemetry.addData("Color Red", this.sensor.getRed());
+        telemetry.addData("Color Green", this.sensor.getGreen());
+        telemetry.addData("Color Blue", this.sensor.getBlue());
     }
 
 

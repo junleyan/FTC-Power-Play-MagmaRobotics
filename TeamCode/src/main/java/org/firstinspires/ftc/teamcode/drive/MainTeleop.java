@@ -19,6 +19,7 @@ public class MainTeleop extends OpMode {
     private MecanumDrive drive = new MecanumDrive();
     private Lift lift = new Lift();
     private Claw claw = new Claw();
+    private SensorGroup sensor = new SensorGroup();
 
 
     @Override
@@ -26,6 +27,7 @@ public class MainTeleop extends OpMode {
         drive.init(hardwareMap);
         lift.init(hardwareMap);
         claw.init(hardwareMap);
+        sensor.init(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
     }
@@ -40,6 +42,12 @@ public class MainTeleop extends OpMode {
 
             telemetry.addData("Status", "Enabled");
             telemetry.addData("Time Remaining", this.runtime.seconds());
+            telemetry.addData("Detected Zone", this.sensor.getZone());
+            telemetry.addData("Color Red", this.sensor.getRed());
+            telemetry.addData("Color Green", this.sensor.getGreen());
+            telemetry.addData("Color Blue", this.sensor.getBlue());
+        } else {
+            this.drive.stop();
         }
     }
 

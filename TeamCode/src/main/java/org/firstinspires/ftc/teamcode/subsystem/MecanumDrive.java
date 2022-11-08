@@ -54,19 +54,16 @@ public class MecanumDrive {
     }
 
 
-    // strafe drive but with fixed power
-    public void setFixedStrafe() {
-        this.leftFront.setPower(-Constants.MecanumDrive.strafePower);
-        this.leftBack.setPower(Constants.MecanumDrive.strafePower);
-        this.rightFront.setPower(Constants.MecanumDrive.strafePower);
-        this.rightBack.setPower(-Constants.MecanumDrive.strafePower);
+    public void stop() {
+        this.setNormal(0, 0);
     }
 
-    public void stop() {
-        this.leftFront.setPower(0);
-        this.leftBack.setPower(0);
-        this.rightFront.setPower(0);
-        this.rightBack.setPower(0);
+    public void goForward() {
+        this.setNormal(0.5, 0.5);
+    }
+
+    public void goBackward() {
+        this.setNormal(0.5, 0.5);
     }
 
 
@@ -76,8 +73,11 @@ public class MecanumDrive {
             this.setStrafe(-0.5, -0.5);
         } else if (gamepad.right_bumper) {
             this.setStrafe(0.5, 0.5);
-        }
-        else {
+        } else if (gamepad.dpad_up) {
+            this.goForward();
+        } else if (gamepad.dpad_down) {
+            this.goBackward();
+        } else {
             this.setNormal(gamepad.left_stick_y, gamepad.right_stick_y);
         }
     }

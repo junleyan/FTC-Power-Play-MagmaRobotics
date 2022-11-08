@@ -10,12 +10,11 @@ import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
 
 
 @Autonomous(name="Main Auto Mode", group="Auto")
-public class MainAuto extends LinearOpMode {
+public class MainAutoRight extends LinearOpMode {
 
 
     private MecanumDrive drive = new MecanumDrive();
     private SensorGroup sensor = new SensorGroup();
-    private double power = 0.2;
     private ElapsedTime runtime = new ElapsedTime();
 
 
@@ -25,12 +24,20 @@ public class MainAuto extends LinearOpMode {
         sensor.init(hardwareMap);
 
         waitForStart();
+        drive.setStrafe(1,1);
 
-        while (opModeIsActive() && (runtime.seconds() <= 3.0)) {
-            drive.setStrafe(0.5, 0.5);
-        }
-        drive.stop();
         runtime.reset();
+        while (opModeIsActive() && (runtime.milliseconds() < 2500)){
+        }
+
+        drive.stop();
+
+        telemetry.addData("path","Complete");
+        telemetry.update();
+        sleep(1000);
+
+
+
     }
 
 
