@@ -35,7 +35,9 @@ public class MainTeleop extends OpMode {
 
     @Override
     public void loop() {
-        if (this.runtime.seconds() < Constants.Timer.teleopTime) {
+
+
+        if (this.runtime.seconds() < Constants.Time.teleopTime) {
             this.drive.setControl(gamepad1);
             this.lift.setControl(gamepad2);
             this.claw.setControl(gamepad2);
@@ -46,9 +48,12 @@ public class MainTeleop extends OpMode {
             telemetry.addData("Color Red", this.sensor.getRed());
             telemetry.addData("Color Green", this.sensor.getGreen());
             telemetry.addData("Color Blue", this.sensor.getBlue());
+            telemetry.addData("Measured Distance", this.sensor.getDistance());
         } else {
             this.drive.stop();
         }
+
+
     }
 
 

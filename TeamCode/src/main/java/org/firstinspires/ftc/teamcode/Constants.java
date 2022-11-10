@@ -9,8 +9,6 @@ public class Constants {
         public static final String leftBack = "leftBack";
         public static final String rightFront = "rightFront";
         public static final String rightBack = "rightBack";
-
-        public static final double strafePower = 0.5;
     }
 
 
@@ -35,9 +33,16 @@ public class Constants {
     }
 
 
-    public static final class Timer {
+    public static final class Time {
         public static final int teleopTime = 120;
         public static final int autoTime = 30;
+        public static final int signalParkingTime = 2500;
+    }
+
+
+    public static final class Auto {
+        public static final double forwardPower = 0.2;
+        public static final double strafePower = 0.5;
     }
 
 

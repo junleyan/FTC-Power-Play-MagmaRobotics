@@ -2,9 +2,7 @@ package org.firstinspires.ftc.teamcode.drive;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.subsystem.Claw;
 import org.firstinspires.ftc.teamcode.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
@@ -34,6 +32,8 @@ public class MainTeleopNoTimer extends OpMode {
 
     @Override
     public void loop() {
+
+
         this.drive.setControl(gamepad1);
         this.lift.setControl(gamepad2);
         this.claw.setControl(gamepad2);
@@ -43,6 +43,9 @@ public class MainTeleopNoTimer extends OpMode {
         telemetry.addData("Color Red", this.sensor.getRed());
         telemetry.addData("Color Green", this.sensor.getGreen());
         telemetry.addData("Color Blue", this.sensor.getBlue());
+        telemetry.addData("Measured Distance", this.sensor.getDistance());
+
+
     }
 
 
@@ -50,5 +53,6 @@ public class MainTeleopNoTimer extends OpMode {
     public void stop() {
         telemetry.addData("Status", "Stopped");
     }
+
 
 }

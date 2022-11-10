@@ -20,6 +20,7 @@ public class SensorGroup {
 
     }
 
+
     public void init(HardwareMap hwMap) {
         this.distance = hwMap.get(DistanceSensor.class, Constants.SensorGroup.distanceSensor);
         this.color = hwMap.get(ColorSensor.class, Constants.SensorGroup.colorSensor);
@@ -31,18 +32,22 @@ public class SensorGroup {
         return this.distance.getDistance(DistanceUnit.CM);
     }
 
+
     // get red values from color sensor
     public int getRed() {
         return this.color.red();
     }
 
+
     public int getBlue() {
         return this.color.blue();
     }
 
+
     public int getGreen() {
         return this.color.green();
     }
+
 
     public int getZone() {
         if (getDistance() <= 3.0) {
@@ -55,7 +60,6 @@ public class SensorGroup {
             return 1;
         }
         return 0;    }
-
 
 
 }
