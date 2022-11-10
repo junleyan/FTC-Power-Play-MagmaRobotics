@@ -10,7 +10,6 @@ public class Constants {
         public static final String rightFront = "rightFront";
         public static final String rightBack = "rightBack";
 
-        public static final double strafePower = 0.5;
         public static final double powerMultiplier = 0.75;
     }
 
@@ -19,6 +18,7 @@ public class Constants {
         public static final String deviceName = "lift";
 
         public static final double power = 1.0;
+        public static final int targetPosition = 3300;
     }
 
 

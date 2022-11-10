@@ -11,8 +11,8 @@ import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
 
 
-@TeleOp(name="Main Teleop Mode", group="OpMode")
-public class MainTeleop extends OpMode {
+@TeleOp(name="Main Teleop Mode With Lift Encoder", group="OpMode")
+public class MainTeleopWithEncoder extends OpMode {
 
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -39,7 +39,7 @@ public class MainTeleop extends OpMode {
     public void loop() {
         if (this.runtime.seconds() < Constants.Timer.teleopTime) {
             this.drive.setControl(gamepad1);
-            this.lift.setControl(gamepad2, false);
+            this.lift.setControl(gamepad2, true);
             this.claw.setControl(gamepad2);
 
             telemetry.addData("Status", "Enabled");

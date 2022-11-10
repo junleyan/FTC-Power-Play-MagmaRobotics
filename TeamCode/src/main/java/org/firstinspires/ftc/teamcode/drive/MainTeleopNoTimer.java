@@ -36,16 +36,18 @@ public class MainTeleopNoTimer extends OpMode {
     @Override
     public void loop() {
         this.drive.setControl(gamepad1);
-        this.lift.setControl(gamepad2);
+        this.lift.setControl(gamepad2, false);
         this.claw.setControl(gamepad2);
 
         telemetry.addData("Status", "Enabled");
-        telemetry.addData("Time Elapsed", this.runtime.seconds());
+        telemetry.addData("Time Remaining", this.runtime.seconds());
+        telemetry.addData("Lift Position", this.lift.getPosition());
         telemetry.addData("Distance", this.sensor.getDistance());
         telemetry.addData("Detected Zone", this.sensor.getZone());
         telemetry.addData("Color Red", this.sensor.getRed());
         telemetry.addData("Color Green", this.sensor.getGreen());
         telemetry.addData("Color Blue", this.sensor.getBlue());
+        telemetry.addData("Button Pressed", gamepad2.dpad_down);
     }
 
 

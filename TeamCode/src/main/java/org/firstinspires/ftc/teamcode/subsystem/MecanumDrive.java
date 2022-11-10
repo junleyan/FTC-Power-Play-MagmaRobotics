@@ -55,19 +55,8 @@ public class MecanumDrive {
     }
 
 
-    // strafe drive but with fixed power
-    public void setFixedStrafe() {
-        this.leftFront.setPower(-Constants.MecanumDrive.strafePower);
-        this.leftBack.setPower(Constants.MecanumDrive.strafePower);
-        this.rightFront.setPower(-Constants.MecanumDrive.strafePower);
-        this.rightBack.setPower(-Constants.MecanumDrive.strafePower);
-    }
-
     public void stop() {
-        this.leftFront.setPower(0);
-        this.leftBack.setPower(0);
-        this.rightFront.setPower(0);
-        this.rightBack.setPower(0);
+        this.setNormal(0, 0);
     }
 
 

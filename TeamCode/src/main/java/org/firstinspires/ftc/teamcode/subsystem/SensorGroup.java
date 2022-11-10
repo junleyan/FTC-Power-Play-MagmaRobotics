@@ -10,7 +10,6 @@ import org.firstinspires.ftc.teamcode.Constants;
 
 public class SensorGroup {
 
-
     private DistanceSensor distance;
     private ColorSensor color;
 
@@ -31,7 +30,6 @@ public class SensorGroup {
         return this.distance.getDistance(DistanceUnit.CM);
     }
 
-
     // get red values from color sensor
     public int getRed() {
         return this.color.red();
@@ -46,14 +44,16 @@ public class SensorGroup {
     }
 
     public int getZone() {
-        if (this.getGreen() > (this.getRed()+this.getBlue()) * 0.75) {
-            return 3;
+        if (getDistance() <= 3.0) {
+            if (this.getGreen() > (this.getRed() + this.getBlue()) * 0.75) {
+                return 3;
+            }
+            if (this.getBlue() > (this.getRed() + this.getGreen()) * 0.75) {
+                return 2;
+            }
+            return 1;
         }
-        if (this.getBlue() > (this.getRed()+this.getGreen()) * 0.75) {
-            return 2;
-        }
-        return 1;
-    }
+        return 0;    }
 
 
 }
