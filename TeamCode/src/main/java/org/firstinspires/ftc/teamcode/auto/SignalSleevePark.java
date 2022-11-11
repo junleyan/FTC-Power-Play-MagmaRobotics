@@ -40,7 +40,16 @@ public class SignalSleevePark extends LinearOpMode {
 
 
         runtime.reset();
-        while ((scheduled_zone == 1) &&
+        while (runtime.milliseconds() < Constants.Time.signalParkingTimeMinor) {
+            telemetry.addData("Task","Adjusting y-axis location");
+            telemetry.update();
+            this.drive.setNormal(Constants.Auto.forwardPower, Constants.Auto.forwardPower);
+        }
+        this.drive.stop();
+
+
+        runtime.reset();
+        while ((scheduled_zone == 3) &&
                 (runtime.milliseconds() < Constants.Time.signalParkingTime) &&
                 (elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Task","Moving toward the left");
@@ -50,7 +59,7 @@ public class SignalSleevePark extends LinearOpMode {
 
 
         runtime.reset();
-        while ((scheduled_zone == 3) &&
+        while ((scheduled_zone == 1) &&
                 (runtime.milliseconds() < Constants.Time.signalParkingTime) &&
                 (elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Task","Moving forward the right");

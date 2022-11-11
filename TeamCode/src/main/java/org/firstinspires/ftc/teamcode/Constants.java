@@ -36,13 +36,14 @@ public class Constants {
     public static final class Time {
         public static final int teleopTime = 120;
         public static final int autoTime = 30;
-        public static final int signalParkingTime = 2500;
+        public static final int signalParkingTime = 1000;
+        public static final int signalParkingTimeMinor = 750;
     }
 
 
     public static final class Auto {
         public static final double forwardPower = 0.2;
-        public static final double strafePower = 0.5;
+        public static final double strafePower = 1;
     }
 
 
