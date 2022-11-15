@@ -50,7 +50,7 @@ public class SensorGroup {
 
 
     public int getZone() {
-        if (getDistance() <= 3.0) {
+        if (getDistance() < 3.0) {
             if (this.getGreen() > (this.getRed() + this.getBlue()) * 0.75) {
                 return 3;
             }
