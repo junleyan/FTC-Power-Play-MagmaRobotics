@@ -37,12 +37,12 @@ public class SignalSleevePark extends LinearOpMode {
         while (opModeIsActive() && (scheduled_zone == 0) && (elapsedTime.seconds() < Constants.Time.autoTime)){
             telemetry.addData("Task","Moving forward until close to sleeve");
             telemetry.update();
-            if (!(sensor.getZone() == 0)) {
-                redValue = sensor.getRed();
-                greenValue = sensor.getGreen();
-                blueValue = sensor.getBlue();
-                distanceValue = sensor.getDistance();
-                scheduled_zone = sensor.getZone();
+            if (!(sensor.Zone() == 0)) {
+                redValue = sensor.Red();
+                greenValue = sensor.Green();
+                blueValue = sensor.Blue();
+                distanceValue = sensor.Distance();
+                scheduled_zone = sensor.Zone();
 
                 this.drive.stop();
             }

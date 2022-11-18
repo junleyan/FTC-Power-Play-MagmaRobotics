@@ -17,6 +17,7 @@ public class NavX {
 
     private IntegratingGyroscope gyro;
     private NavxMicroNavigationSensor navxMicro;
+    private double targetAngle = 0;
 
 
     // initialization
@@ -28,7 +29,8 @@ public class NavX {
     public void init(HardwareMap hwMap) {
         navxMicro = hwMap.get(NavxMicroNavigationSensor.class, Constants.NavX.deviceName);
         gyro = (IntegratingGyroscope)navxMicro;
-        while (isCalibrating()) {
+        while (this.isCalibrating()) {
+
         }
     }
 
@@ -38,32 +40,32 @@ public class NavX {
     }
 
 
-    public double getAngVelX() {
+    public double AngVelX() {
         AngularVelocity rates = gyro.getAngularVelocity(AngleUnit.DEGREES);
         return rates.xRotationRate;
     }
 
 
-    public double getAngVelY() {
+    public double AngVelY() {
        AngularVelocity rates = gyro.getAngularVelocity(AngleUnit.DEGREES);
        return rates.yRotationRate;
     }
 
 
-    public double getAngVelZ() {
+    public double AngVelZ() {
         AngularVelocity rates = gyro.getAngularVelocity(AngleUnit.DEGREES);
         return rates.zRotationRate;
     }
 
 
-    public double getHeading() {
+    public double Heading() {
         Orientation angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         return angles.firstAngle;
     }
 
 
     public boolean isCenter() {
-        if ((this.getHeading() < 1.0) && (this.getHeading() > 1.0)) {
+        if ((this.Heading() < 1.0) && (this.Heading() > 1.0)) {
             return true;
         }
         return false;
@@ -71,12 +73,12 @@ public class NavX {
 
 
     public boolean isTiltedLeft() {
-        return (this.getHeading() >= 1.0);
+        return (this.Heading() >= 1.0);
     }
 
 
     public boolean isTiltedRight() {
-        return (this.getHeading() <= -1.0);
+        return (this.Heading() <= -1.0);
     }
 
 

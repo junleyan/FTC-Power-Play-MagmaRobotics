@@ -32,6 +32,11 @@ public class MecanumDrive {
         this.leftBack.setDirection(DcMotor.Direction.REVERSE);
         this.rightFront.setDirection(DcMotor.Direction.FORWARD);
         this.rightBack.setDirection(DcMotor.Direction.FORWARD);
+
+        this.leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
 

@@ -28,33 +28,33 @@ public class SensorGroup {
 
 
     // gets detected distance in cm
-    public double getDistance() {
+    public double Distance() {
         return this.distance.getDistance(DistanceUnit.CM);
     }
 
 
     // get red values from color sensor
-    public int getRed() {
+    public int Red() {
         return this.color.red();
     }
 
 
-    public int getBlue() {
+    public int Blue() {
         return this.color.blue();
     }
 
 
-    public int getGreen() {
+    public int Green() {
         return this.color.green();
     }
 
 
-    public int getZone() {
-        if (getDistance() < 3.0) {
-            if (this.getGreen() > (this.getRed() + this.getBlue()) * 0.75) {
+    public int Zone() {
+        if (Distance() < 3.0) {
+            if (this.Green() > (this.Red() + this.Blue()) * 0.75) {
                 return 3;
             }
-            if (this.getBlue() > (this.getRed() + this.getGreen()) * 0.75) {
+            if (this.Blue() > (this.Red() + this.Green()) * 0.75) {
                 return 2;
             }
             return 1;
