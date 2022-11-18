@@ -24,17 +24,17 @@ public class MainTeleop extends OpMode {
 
     @Override
     public void init() {
-        drive.init(hardwareMap);
-        lift.init(hardwareMap);
-        claw.init(hardwareMap);
-        sensor.init(hardwareMap);
+        this.drive.init(hardwareMap);
+        this.lift.init(hardwareMap);
+        this.claw.init(hardwareMap);
+        this.sensor.init(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
     }
 
     @Override
     public void start() {
-        runtime.reset();
+        this.runtime.reset();
     }
 
     @Override

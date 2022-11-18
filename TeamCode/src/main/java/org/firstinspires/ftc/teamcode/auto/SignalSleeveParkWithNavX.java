@@ -39,41 +39,42 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
     public void runOpMode() {
 
 
-        drive.init(hardwareMap);
-        sensor.init(hardwareMap);
-        navx.init(hardwareMap);
+        this.drive.init(hardwareMap);
+        this.sensor.init(hardwareMap);
+        this.navx.init(hardwareMap);
         waitForStart();
 
 
         // move toward the signal sleeve
-        adjustDrive();
-        while (opModeIsActive() && (scheduled_zone == 0) && (elapsedTime.seconds() < Constants.Time.autoTime)){
-            telemetry.addData("Status","Moving forward until close to sleeve");
-            telemetry.addData("Heading", navx.Heading());
-            telemetry.update();
+        this.adjustDrive();
+        while (opModeIsActive() && (this.scheduled_zone == 0) &&
+                (this.elapsedTime.seconds() < Constants.Time.autoTime)){
+            this.telemetry.addData("Status","Moving forward until close to sleeve");
+            this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.update();
             if (!(sensor.Zone() == 0)) {
-                scheduled_zone = sensor.Zone();
+                this.scheduled_zone = sensor.Zone();
                 this.drive.stop();
             }
         }
 
 
         // move forward more to adjust the position
-        runtime.reset();
+        this.runtime.reset();
         while (runtime.milliseconds() < Constants.Time.signalParkingTimeMinor) {
-            telemetry.addData("Status","Adjusting y-axis location");
-            telemetry.addData("Heading", navx.Heading());
-            telemetry.update();
+            this.telemetry.addData("Status","Adjusting y-axis location");
+            this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.update();
             this.drive.setNormal(Constants.Auto.forwardPower, Constants.Auto.forwardPower);
         }
         this.drive.stop();
 
 
         // route if zone is 3
-        runtime.reset();
-        while ((scheduled_zone == 3) &&
-                (navx.Heading() > -90) &&
-                (elapsedTime.seconds() < Constants.Time.autoTime)) {
+        this.runtime.reset();
+        while ((this.scheduled_zone == 3) &&
+                (this.navx.Heading() > -90) &&
+                (this.elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Status","Moving toward the left");
             telemetry.addData("Heading", navx.Heading());
             telemetry.update();
@@ -82,22 +83,22 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
 
 
         // route if zone is 1
-        runtime.reset();
-        while ((scheduled_zone == 1) &&
-                (navx.Heading() < 90) &&
-                (elapsedTime.seconds() < Constants.Time.autoTime)) {
+        this.runtime.reset();
+        while ((this.scheduled_zone == 1) &&
+                (this.navx.Heading() < 90) &&
+                (this.elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Status","Moving forward the right");
-            telemetry.addData("Heading", navx.Heading());
+            telemetry.addData("Heading", this.navx.Heading());
             telemetry.update();
             this.drive.setNormal(Constants.Auto.forwardPower, -Constants.Auto.forwardPower);
         }
 
 
         // move forward more to adjust position
-        runtime.reset();
-        while (runtime.milliseconds() < Constants.Time.signalParkingTimeMajor) {
+        this.runtime.reset();
+        while (this.runtime.milliseconds() < Constants.Time.signalParkingTimeMajor) {
             telemetry.addData("Status","Adjusting x-axis location");
-            telemetry.addData("Heading", navx.Heading());
+            telemetry.addData("Heading", this.navx.Heading());
             telemetry.update();
             this.drive.setNormal(Constants.Auto.forwardPower, Constants.Auto.forwardPower);
         }
@@ -107,9 +108,9 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         // end of auto and reports status
         while (opModeIsActive()) {
             telemetry.addData("Status", "Auto completed! Please record the following values!");
-            telemetry.addData("Route", scheduled_zone);
-            telemetry.addData("RBG", sensor.Green());
-            telemetry.addData("Heading", navx.Heading());
+            telemetry.addData("Route", this.scheduled_zone);
+            telemetry.addData("RBG", this.sensor.Red() + ", " + this.sensor.Blue() + ", " + this.sensor.Green());
+            telemetry.addData("Heading", this.navx.Heading());
             telemetry.update();
         }
         this.drive.stop();
