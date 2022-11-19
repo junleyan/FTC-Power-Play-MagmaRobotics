@@ -48,7 +48,7 @@ public class Constants {
 
 
     public static final class Auto {
-        public static final double forwardPower = 0.15;
+        public static final double forwardPower = 0.2;
         public static final double strafePower = 0.7;
     }
 

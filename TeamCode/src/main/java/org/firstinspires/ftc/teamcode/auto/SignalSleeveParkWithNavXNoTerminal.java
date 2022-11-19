@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.subsystem.NavX;
 import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
 
 
-@Autonomous(name="Signal Sleeve Based Parking With NavX", group="Auto")
-public class SignalSleeveParkWithNavX extends LinearOpMode {
+@Autonomous(name="Signal Sleeve Based Parking With NavX (Non Terminal Side)", group="Auto")
+public class SignalSleeveParkWithNavXNoTerminal extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private ElapsedTime elapsedTime = new ElapsedTime();
@@ -83,25 +83,15 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         this.drive.stop();
 
 
-        this.runtime.reset();
-        while (runtime.milliseconds() < 950) {
-            this.telemetry.addData("Status","Adjusting y-axis location");
-            this.telemetry.addData("Heading", this.navx.Heading());
-            this.telemetry.update();
-            this.drive.setNormal(-Constants.Auto.forwardPower, -Constants.Auto.forwardPower);
-        }
-        this.drive.stop();
-
-
         // route if zone is 3 or 1
         this.runtime.reset();
-        while ((this.scheduled_zone == 3 || this.scheduled_zone == 1) &&
-                (this.navx.Heading() > -90) &&
+        while ((this.scheduled_zone == 1 || this.scheduled_zone == 3) &&
+                (this.navx.Heading() < 90) &&
                 (this.elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Status","Moving toward the left");
             telemetry.addData("Heading", navx.Heading());
             telemetry.update();
-            this.drive.setNormal(-0.2, 0.2);
+            this.drive.setNormal(0.2, -0.2);
         }
 
 
@@ -117,10 +107,10 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         this.drive.stop();
 
 
-        // route if zone is 1
+        // route if zone is 3
         this.runtime.reset();
-        while ((this.scheduled_zone == 1) &&
-                (this.runtime.milliseconds() < 3000) &&
+        while ((this.scheduled_zone == 3) &&
+                (this.runtime.milliseconds() < 4000) &&
                 (this.elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Status","Moving toward the left");
             telemetry.addData("Heading", navx.Heading());
@@ -132,14 +122,14 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
 
 
         this.runtime.reset();
-        while ((this.scheduled_zone == 1) &&
+        while ((this.scheduled_zone == 3) &&
                 (this.runtime.milliseconds() < 1500) &&
                 (this.elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Status","Moving toward the left");
             telemetry.addData("Heading", navx.Heading());
             telemetry.addData("Distance", sensor.Distance());
             telemetry.update();
-            this.drive.setStrafe(0.2, 0.2);
+            this.drive.setStrafe(-0.2, -0.2);
         }
         this.drive.stop();
 
