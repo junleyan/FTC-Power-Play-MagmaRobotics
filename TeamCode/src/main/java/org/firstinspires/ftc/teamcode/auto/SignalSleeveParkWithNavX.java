@@ -83,6 +83,7 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         this.drive.stop();
 
 
+        // move backward more to adjust the position
         this.runtime.reset();
         while (runtime.milliseconds() < 950) {
             this.telemetry.addData("Status","Adjusting y-axis location");
@@ -93,7 +94,7 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         this.drive.stop();
 
 
-        // route if zone is 3 or 1
+        // route if zone is 3 or 1 | make 90 degree turn
         this.runtime.reset();
         while ((this.scheduled_zone == 3 || this.scheduled_zone == 1) &&
                 (this.navx.Heading() > -90) &&
@@ -105,7 +106,7 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         }
 
 
-        // move forward more to adjust position
+        // move forward more to adjust position | move to wall
         this.runtime.reset();
         while ((this.runtime.milliseconds() < Constants.Time.signalParkingTimeMajor) &&
                 (this.scheduled_zone == 1 || this.scheduled_zone == 3)) {
@@ -117,7 +118,7 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         this.drive.stop();
 
 
-        // route if zone is 1
+        // route if zone is 1 | goes to zone 1
         this.runtime.reset();
         while ((this.scheduled_zone == 1) &&
                 (this.runtime.milliseconds() < 3000) &&
@@ -131,6 +132,7 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         this.drive.stop();
 
 
+        // strafe for a short time to fit into zones
         this.runtime.reset();
         while ((this.scheduled_zone == 1) &&
                 (this.runtime.milliseconds() < 1500) &&
