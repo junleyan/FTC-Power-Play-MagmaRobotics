@@ -56,6 +56,7 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         this.sensor.init(hardwareMap);
         this.navx.init(hardwareMap);
         waitForStart();
+        elapsedTime.reset();
 
 
         // move toward the signal sleeve
@@ -109,7 +110,7 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         // move forward more to adjust position | move to wall
         this.runtime.reset();
         while ((this.runtime.milliseconds() < Constants.Time.signalParkingTimeMajor) &&
-                (this.scheduled_zone == 1 || this.scheduled_zone == 3)) {
+                (this.scheduled_zone == 3)) {
             telemetry.addData("Status","Adjusting x-axis location");
             telemetry.addData("Heading", this.navx.Heading());
             telemetry.update();
@@ -121,7 +122,7 @@ public class SignalSleeveParkWithNavX extends LinearOpMode {
         // route if zone is 1 | goes to zone 1
         this.runtime.reset();
         while ((this.scheduled_zone == 1) &&
-                (this.runtime.milliseconds() < 3000) &&
+                (this.runtime.milliseconds() < 2000) &&
                 (this.elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Status","Moving toward the left");
             telemetry.addData("Heading", navx.Heading());

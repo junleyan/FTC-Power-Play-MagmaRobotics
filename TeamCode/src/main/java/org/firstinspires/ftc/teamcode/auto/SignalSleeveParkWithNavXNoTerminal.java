@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.subsystem.NavX;
 import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
 
 
-@Autonomous(name="Signal Sleeve Based Parking With NavX (Non Terminal Side)", group="Auto")
+@Autonomous(name="Signal Sleeve Based Parking With NavX (No Terminal)", group="Auto")
 public class SignalSleeveParkWithNavXNoTerminal extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -56,6 +56,7 @@ public class SignalSleeveParkWithNavXNoTerminal extends LinearOpMode {
         this.sensor.init(hardwareMap);
         this.navx.init(hardwareMap);
         waitForStart();
+        elapsedTime.reset();
 
 
         // move toward the signal sleeve
@@ -83,22 +84,33 @@ public class SignalSleeveParkWithNavXNoTerminal extends LinearOpMode {
         this.drive.stop();
 
 
-        // route if zone is 3 or 1
+        // move backward more to adjust the position
         this.runtime.reset();
-        while ((this.scheduled_zone == 1 || this.scheduled_zone == 3) &&
-                (this.navx.Heading() < 90) &&
+        while (runtime.milliseconds() < 950) {
+            this.telemetry.addData("Status","Adjusting y-axis location");
+            this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.update();
+            this.drive.setNormal(-Constants.Auto.forwardPower, -Constants.Auto.forwardPower);
+        }
+        this.drive.stop();
+
+
+        // route if zone is 3 or 1 | make 90 degree turn
+        this.runtime.reset();
+        while ((this.scheduled_zone == 3 || this.scheduled_zone == 1) &&
+                (this.navx.Heading() > -90) &&
                 (this.elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Status","Moving toward the left");
             telemetry.addData("Heading", navx.Heading());
             telemetry.update();
-            this.drive.setNormal(0.2, -0.2);
+            this.drive.setNormal(-0.2, 0.2);
         }
 
 
-        // move forward more to adjust position
+        // move forward more to adjust position | move to wall
         this.runtime.reset();
-        while ((this.runtime.milliseconds() < Constants.Time.signalParkingTimeMajor) &&
-                (this.scheduled_zone == 1 || this.scheduled_zone == 3)) {
+        while ((this.runtime.milliseconds() < 2000) &&
+                (this.scheduled_zone == 3)) {
             telemetry.addData("Status","Adjusting x-axis location");
             telemetry.addData("Heading", this.navx.Heading());
             telemetry.update();
@@ -107,10 +119,10 @@ public class SignalSleeveParkWithNavXNoTerminal extends LinearOpMode {
         this.drive.stop();
 
 
-        // route if zone is 3
+        // route if zone is 1 | goes to zone 1
         this.runtime.reset();
-        while ((this.scheduled_zone == 3) &&
-                (this.runtime.milliseconds() < 4000) &&
+        while ((this.scheduled_zone == 1) &&
+                (this.runtime.milliseconds() < 2000) &&
                 (this.elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Status","Moving toward the left");
             telemetry.addData("Heading", navx.Heading());
@@ -121,6 +133,7 @@ public class SignalSleeveParkWithNavXNoTerminal extends LinearOpMode {
         this.drive.stop();
 
 
+        // strafe for a short time to fit into zones
         this.runtime.reset();
         while ((this.scheduled_zone == 3) &&
                 (this.runtime.milliseconds() < 1500) &&
