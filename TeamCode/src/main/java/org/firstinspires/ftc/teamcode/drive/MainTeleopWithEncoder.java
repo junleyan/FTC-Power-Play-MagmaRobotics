@@ -37,7 +37,7 @@ public class MainTeleopWithEncoder extends OpMode {
 
     @Override
     public void loop() {
-        if (this.runtime.seconds() < Constants.Timer.teleopTime) {
+        if (this.runtime.seconds() < Constants.Time.teleopTime) {
             this.drive.setControl(gamepad1);
             this.lift.setControl(gamepad2, true);
             this.claw.setControl(gamepad2);
@@ -45,11 +45,10 @@ public class MainTeleopWithEncoder extends OpMode {
             telemetry.addData("Status", "Enabled");
             telemetry.addData("Time Remaining", this.runtime.seconds());
             telemetry.addData("Lift Position", this.lift.getPosition());
-            telemetry.addData("Distance", this.sensor.getDistance());
-            telemetry.addData("Detected Zone", this.sensor.getZone());
-            telemetry.addData("Color Red", this.sensor.getRed());
-            telemetry.addData("Color Green", this.sensor.getGreen());
-            telemetry.addData("Color Blue", this.sensor.getBlue());
+            telemetry.addData("Detected Zone", this.sensor.Zone());
+            telemetry.addData("Color Red", this.sensor.Red());
+            telemetry.addData("Color Green", this.sensor.Green());
+            telemetry.addData("Color Blue", this.sensor.Blue());
             telemetry.addData("Button Pressed", gamepad2.dpad_down);
         } else {
             this.drive.stop();

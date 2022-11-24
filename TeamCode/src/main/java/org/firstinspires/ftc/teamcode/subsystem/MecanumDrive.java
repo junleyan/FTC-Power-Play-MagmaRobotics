@@ -37,8 +37,6 @@ public class MecanumDrive {
 
     // normal drive
     public void setNormal(double leftPower, double rightPower) {
-        rightPower *= Constants.MecanumDrive.powerMultiplier;
-        leftPower *= Constants.MecanumDrive.powerMultiplier;
         this.leftFront.setPower(-leftPower);
         this.leftBack.setPower(-leftPower);
         this.rightFront.setPower(-rightPower);

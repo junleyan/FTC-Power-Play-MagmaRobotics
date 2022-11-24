@@ -33,9 +33,23 @@ public class Constants {
     }
 
 
-    public static final class Timer {
+    public static final class NavX {
+        public static final String deviceName = "navx";
+    }
+
+
+    public static final class Time {
         public static final int teleopTime = 120;
         public static final int autoTime = 30;
+        public static final int signalParkingTime = 1000;
+        public static final int signalParkingTimeMinor = 2000;
+        public static final int signalParkingTimeMajor = 4000;
+    }
+
+
+    public static final class Auto {
+        public static final double forwardPower = 0.2;
+        public static final double strafePower = 0.7;
     }
 
 

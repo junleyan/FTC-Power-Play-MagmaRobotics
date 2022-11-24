@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.subsystem.Claw;
 import org.firstinspires.ftc.teamcode.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
@@ -42,11 +41,10 @@ public class MainTeleopNoTimer extends OpMode {
         telemetry.addData("Status", "Enabled");
         telemetry.addData("Time Remaining", this.runtime.seconds());
         telemetry.addData("Lift Position", this.lift.getPosition());
-        telemetry.addData("Distance", this.sensor.getDistance());
-        telemetry.addData("Detected Zone", this.sensor.getZone());
-        telemetry.addData("Color Red", this.sensor.getRed());
-        telemetry.addData("Color Green", this.sensor.getGreen());
-        telemetry.addData("Color Blue", this.sensor.getBlue());
+        telemetry.addData("Detected Zone", this.sensor.Zone());
+        telemetry.addData("Color Red", this.sensor.Red());
+        telemetry.addData("Color Green", this.sensor.Green());
+        telemetry.addData("Color Blue", this.sensor.Blue());
         telemetry.addData("Button Pressed", gamepad2.dpad_down);
     }
 
