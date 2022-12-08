@@ -50,7 +50,7 @@ public class SensorGroup {
 
 
     public int Zone() {
-        if (Distance() < 3.0) {
+        if (Distance() < 2.7) {
             if (this.Green() > (this.Red() + this.Blue()) * 0.75) {
                 return 3;
             }
