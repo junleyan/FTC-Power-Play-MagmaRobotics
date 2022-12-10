@@ -32,6 +32,11 @@ public class MecanumDrive {
         this.leftBack.setDirection(DcMotor.Direction.FORWARD);
         this.rightFront.setDirection(DcMotor.Direction.FORWARD);
         this.rightBack.setDirection(DcMotor.Direction.REVERSE);
+
+        this.leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
 
@@ -48,8 +53,8 @@ public class MecanumDrive {
     public void setStrafe(double leftPower, double rightPower) {
         this.leftFront.setPower(-leftPower);
         this.leftBack.setPower(leftPower);
-        this.rightFront.setPower(rightPower);
-        this.rightBack.setPower(rightPower);
+        this.rightFront.setPower(-rightPower);
+        this.rightBack.setPower(-rightPower);
     }
 
 
