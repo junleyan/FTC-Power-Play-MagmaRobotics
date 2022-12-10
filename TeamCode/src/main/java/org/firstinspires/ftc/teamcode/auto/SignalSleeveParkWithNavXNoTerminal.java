@@ -86,7 +86,7 @@ public class SignalSleeveParkWithNavXNoTerminal extends LinearOpMode {
 
         // move backward more to adjust the position
         this.runtime.reset();
-        while (runtime.milliseconds() < 500) {
+        while (runtime.milliseconds() < 750) {
             this.telemetry.addData("Status","Adjusting y-axis location");
             this.telemetry.addData("Heading", this.navx.Heading());
             this.telemetry.update();
@@ -122,7 +122,7 @@ public class SignalSleeveParkWithNavXNoTerminal extends LinearOpMode {
         // route if zone is 1 | goes to zone 1
         this.runtime.reset();
         while ((this.scheduled_zone == 1) &&
-                (this.runtime.milliseconds() < 1500) &&
+                (this.runtime.milliseconds() < 1200) &&
                 (this.elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Status","Moving toward the left");
             telemetry.addData("Heading", navx.Heading());
