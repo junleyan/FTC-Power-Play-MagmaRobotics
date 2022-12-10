@@ -11,8 +11,8 @@ import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
 
 
-@TeleOp(name="Main Teleop Mode With Lift Encoder", group="OpMode")
-public class MainTeleopWithEncoder extends OpMode {
+@TeleOp(name="Main Teleop Mode (Jefferson)", group="OpMode")
+public class MainTeleopJefferson extends OpMode {
 
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -29,7 +29,6 @@ public class MainTeleopWithEncoder extends OpMode {
         this.claw.init(hardwareMap);
         this.sensor.init(hardwareMap);
 
-        this.lift.downWithEncoder();
 
         telemetry.addData("Status", "Initialized");
     }
@@ -38,8 +37,8 @@ public class MainTeleopWithEncoder extends OpMode {
     @Override
     public void loop() {
         if (this.runtime.seconds() < Constants.Time.teleopTime) {
-            this.drive.setControl(gamepad1);
-            this.lift.setControl(gamepad2, true);
+            this.drive.setControlJefferson(gamepad1);
+            this.lift.setControl(gamepad2, false);
             this.claw.setControl(gamepad2);
 
             telemetry.addData("Status", "Enabled");
@@ -49,7 +48,6 @@ public class MainTeleopWithEncoder extends OpMode {
             telemetry.addData("Color Red", this.sensor.Red());
             telemetry.addData("Color Green", this.sensor.Green());
             telemetry.addData("Color Blue", this.sensor.Blue());
-            telemetry.addData("Button Pressed", gamepad2.dpad_down);
         } else {
             this.drive.stop();
         }

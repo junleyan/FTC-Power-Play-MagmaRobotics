@@ -65,7 +65,18 @@ public class MecanumDrive {
         } else if (gamepad.right_bumper) {
             this.setStrafe(0.5, 0.5);
         } else {
-            this.setNormal(gamepad.left_stick_y, gamepad.right_stick_y);
+            this.setNormal(gamepad.left_stick_y * 0.6, gamepad.right_stick_y * 0.6);
+        }
+    }
+
+
+    public void setControlJefferson(Gamepad gamepad) {
+        if (gamepad.left_bumper) {
+            this.setStrafe(-0.5, -0.5);
+        } else if (gamepad.right_bumper) {
+            this.setStrafe(0.5, 0.5);
+        } else {
+            this.setNormal(gamepad.left_stick_y * 0.9, gamepad.right_stick_y * 0.9);
         }
     }
 

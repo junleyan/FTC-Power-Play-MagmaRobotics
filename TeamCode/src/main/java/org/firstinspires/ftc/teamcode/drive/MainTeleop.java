@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
 
 
-@TeleOp(name="Main Teleop Mode", group="OpMode")
+@TeleOp(name="Main Teleop Mode (Ayaka)", group="OpMode")
 public class MainTeleop extends OpMode {
 
 
@@ -29,7 +29,6 @@ public class MainTeleop extends OpMode {
         this.claw.init(hardwareMap);
         this.sensor.init(hardwareMap);
 
-        this.lift.downWithEncoder();
 
         telemetry.addData("Status", "Initialized");
     }
@@ -49,7 +48,6 @@ public class MainTeleop extends OpMode {
             telemetry.addData("Color Red", this.sensor.Red());
             telemetry.addData("Color Green", this.sensor.Green());
             telemetry.addData("Color Blue", this.sensor.Blue());
-            telemetry.addData("Button Pressed", gamepad2.dpad_down);
         } else {
             this.drive.stop();
         }

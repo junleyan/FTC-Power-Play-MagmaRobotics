@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
 
 
-@TeleOp(name="Main Teleop Mode: No Timer", group="OpMode")
-public class MainTeleopNoTimer extends OpMode {
+@TeleOp(name="Main Teleop Mode: No Timer for Jeff", group="OpMode")
+public class MainTeleopNoTimerJefferson extends OpMode {
 
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -34,7 +34,7 @@ public class MainTeleopNoTimer extends OpMode {
 
     @Override
     public void loop() {
-        this.drive.setControl(gamepad1);
+        this.drive.setControlJefferson(gamepad1);
         this.lift.setControl(gamepad2, false);
         this.claw.setControl(gamepad2);
 
