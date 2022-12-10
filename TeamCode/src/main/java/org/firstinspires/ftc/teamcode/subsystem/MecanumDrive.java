@@ -63,12 +63,49 @@ public class MecanumDrive {
     }
 
 
+    public void forward() {
+        this.setNormal(0.4, 0.4);
+    }
+
+
+    public void backward() {
+        this.setNormal(-0.4, -0.4);
+    }
+
+    public void leftward() {
+        this.setStrafe(-0.5, -0.5);
+    }
+
+
+    public void rightward() {
+        this.setStrafe(0.5, 0.5);
+    }
+
+
+    public void leftwardSlower() {
+        this.setStrafe(-0.3, -0.3);
+    }
+
+
+    public void rightwardSlower() {
+        this.setStrafe(-0.3, -0.3);
+    }
+
+
     // controller logic
     public void setControl(Gamepad gamepad) {
         if (gamepad.left_bumper) {
-            this.setStrafe(-0.5, -0.5);
+            this.leftward();
         } else if (gamepad.right_bumper) {
-            this.setStrafe(0.5, 0.5);
+            this.rightward();
+        } else if (gamepad.dpad_up) {
+            this.backward();
+        } else if (gamepad.dpad_down) {
+            this.forward();
+        } else if (gamepad.dpad_left) {
+            this.leftwardSlower();
+        } else if (gamepad.dpad_right) {
+            this.rightwardSlower();
         } else {
             this.setNormal(gamepad.left_stick_y * 0.6, gamepad.right_stick_y * 0.6);
         }
@@ -77,9 +114,17 @@ public class MecanumDrive {
 
     public void setControlJefferson(Gamepad gamepad) {
         if (gamepad.left_bumper) {
-            this.setStrafe(-0.5, -0.5);
+            this.leftward();
         } else if (gamepad.right_bumper) {
-            this.setStrafe(0.5, 0.5);
+            this.rightward();
+        } else if (gamepad.dpad_up) {
+            this.backward();
+        } else if (gamepad.dpad_down) {
+            this.forward();
+        } else if (gamepad.dpad_left) {
+            this.leftwardSlower();
+        } else if (gamepad.dpad_right) {
+            this.rightwardSlower();
         } else {
             this.setNormal(gamepad.left_stick_y * 0.9, gamepad.right_stick_y * 0.9);
         }

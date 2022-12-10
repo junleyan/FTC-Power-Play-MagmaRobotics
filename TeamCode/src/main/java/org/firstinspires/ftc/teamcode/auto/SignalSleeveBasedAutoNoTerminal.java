@@ -86,7 +86,7 @@ public class SignalSleeveBasedAutoNoTerminal extends LinearOpMode {
 
         // move backward more to adjust the position
         this.runtime.reset();
-        while (runtime.milliseconds() < 950) {
+        while (runtime.milliseconds() < 250) {
             this.telemetry.addData("Status","Adjusting y-axis location");
             this.telemetry.addData("Heading", this.navx.Heading());
             this.telemetry.update();
