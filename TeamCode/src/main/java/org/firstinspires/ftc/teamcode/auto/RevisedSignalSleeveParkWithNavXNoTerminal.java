@@ -5,22 +5,18 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Constants;
-import org.firstinspires.ftc.teamcode.subsystem.Claw;
-import org.firstinspires.ftc.teamcode.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.NavX;
 import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
 
 
-@Autonomous(name="Testing Script (DO NOT USE)", group="Auto")
-public class AutoTest extends LinearOpMode {
+@Autonomous(name="Revised Signal Sleeve Based Parking With NavX (No Terminal)", group="Auto")
+public class RevisedSignalSleeveParkWithNavXNoTerminal extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private ElapsedTime elapsedTime = new ElapsedTime();
     private MecanumDrive drive = new MecanumDrive();
     private SensorGroup sensor = new SensorGroup();
-    private Claw claw = new Claw();
-    private Lift lift = new Lift();
     private NavX navx = new NavX();
 
     private int scheduled_zone = 0;
@@ -30,11 +26,11 @@ public class AutoTest extends LinearOpMode {
         double rightPower = Constants.Auto.forwardPower;
         double leftPower = Constants.Auto.forwardPower;
         if (this.navx.isTiltedLeft()) {
-            this.drive.setNormal(leftPower, rightPower * 0.75);
+            this.drive.setNormal(-leftPower, -rightPower * 0.75);
         } else if (this.navx.isTiltedRight()) {
-            this.drive.setNormal(leftPower * 0.75, rightPower);
+            this.drive.setNormal(-leftPower * 0.75, -rightPower);
         } else {
-            this.drive.setNormal(leftPower, rightPower);
+            this.drive.setNormal(-leftPower, -rightPower);
         }
     }
 
@@ -59,15 +55,12 @@ public class AutoTest extends LinearOpMode {
         this.drive.init(hardwareMap);
         this.sensor.init(hardwareMap);
         this.navx.init(hardwareMap);
-        this.claw.init(hardwareMap);
-        this.lift.init(hardwareMap);
         waitForStart();
         elapsedTime.reset();
 
 
         // move toward the signal sleeve
         this.adjustDrive();
-        this.claw.close();
         while (opModeIsActive() && (this.scheduled_zone == 0) &&
                 (this.elapsedTime.seconds() < Constants.Time.autoTime)){
             this.telemetry.addData("Status","Moving forward until close to sleeve");
@@ -79,21 +72,10 @@ public class AutoTest extends LinearOpMode {
             }
         }
 
-        this.lift.up();
+
         // move forward more to adjust the position
         this.runtime.reset();
         while (runtime.milliseconds() < 1500) {
-            this.telemetry.addData("Status","Adjusting y-axis location");
-            this.telemetry.addData("Heading", this.navx.Heading());
-            this.telemetry.update();
-            this.drive.setNormal(Constants.Auto.forwardPower, Constants.Auto.forwardPower);
-        }
-        this.drive.stop();
-
-
-        // move backward more to adjust the position
-        this.runtime.reset();
-        while (runtime.milliseconds() < 1250) {
             this.telemetry.addData("Status","Adjusting y-axis location");
             this.telemetry.addData("Heading", this.navx.Heading());
             this.telemetry.update();
@@ -102,25 +84,15 @@ public class AutoTest extends LinearOpMode {
         this.drive.stop();
 
 
+        // move backward more to adjust the position
         this.runtime.reset();
         while (runtime.milliseconds() < 900) {
-            this.telemetry.addData("Status","Adjusting -axis location for cone");
+            this.telemetry.addData("Status","Adjusting y-axis location");
             this.telemetry.addData("Heading", this.navx.Heading());
             this.telemetry.update();
-            this.drive.setStrafe(0.5, 0.5);
+            this.drive.setNormal(Constants.Auto.forwardPower, Constants.Auto.forwardPower);
         }
         this.drive.stop();
-        this.claw.open();
-
-
-        this.runtime.reset();
-        while (runtime.milliseconds() < 900) {
-            this.telemetry.addData("Status","Adjusting -axis location for cone");
-            this.telemetry.addData("Heading", this.navx.Heading());
-            this.telemetry.update();
-            this.drive.setStrafe(-0.5, -0.5);
-        }
-        this.lift.stop();
 
 
         // route if zone is 3 or 1 | make 90 degree turn
@@ -142,7 +114,7 @@ public class AutoTest extends LinearOpMode {
             telemetry.addData("Status","Adjusting x-axis location");
             telemetry.addData("Heading", this.navx.Heading());
             telemetry.update();
-            this.drive.setNormal(Constants.Auto.forwardPower, Constants.Auto.forwardPower);
+            this.drive.setNormal(-Constants.Auto.forwardPower, -Constants.Auto.forwardPower);
         }
         this.drive.stop();
 
@@ -156,7 +128,7 @@ public class AutoTest extends LinearOpMode {
             telemetry.addData("Heading", navx.Heading());
             telemetry.addData("Distance", sensor.Distance());
             telemetry.update();
-            this.drive.setNormal(-0.3, -0.3);
+            this.drive.setNormal(0.3, 0.3);
         }
         this.drive.stop();
 
@@ -170,7 +142,7 @@ public class AutoTest extends LinearOpMode {
             telemetry.addData("Heading", navx.Heading());
             telemetry.addData("Distance", sensor.Distance());
             telemetry.update();
-            this.drive.setStrafe(-0.2, -0.2);
+            this.drive.setStrafe(0.2, 0.2);
         }
         this.drive.stop();
 

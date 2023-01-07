@@ -40,6 +40,43 @@ public class MecanumDrive {
     }
 
 
+    public void enableEncoder() {
+        this.leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void enableRunToPos() {
+        this.leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+
+    public void disableEncoder() {
+        this.leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+
+
+    public void resetEncoder() {
+        this.leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    public int Pos() {
+        return this.leftBack.getCurrentPosition();
+    }
+
+
+    public void moveTo(int position, double power) {
+        this.leftBack.setTargetPosition(position);
+        this.setNormal(power, power);
+    }
+
+
+    // not used
+    public void disableMoveTo() {
+        this.disableEncoder();
+        this.resetEncoder();
+        this.stop();
+    }
+
+
     // normal drive
     public void setNormal(double leftPower, double rightPower) {
         this.leftFront.setPower(leftPower);
