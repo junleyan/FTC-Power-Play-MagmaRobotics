@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.subsystem.Claw;
+import org.firstinspires.ftc.teamcode.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.subsystem.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystem.NavX;
 import org.firstinspires.ftc.teamcode.subsystem.SensorGroup;
@@ -18,6 +20,8 @@ public class EncoderSignalPark extends LinearOpMode {
     private MecanumDrive drive = new MecanumDrive();
     private SensorGroup sensor = new SensorGroup();
     private NavX navx = new NavX();
+    private Lift lift = new Lift();
+    private Claw claw = new Claw();
 
     private int scheduled_zone = 0;
 
@@ -42,10 +46,24 @@ public class EncoderSignalPark extends LinearOpMode {
         this.drive.init(hardwareMap);
         this.sensor.init(hardwareMap);
         this.navx.init(hardwareMap);
+        this.lift.init(hardwareMap);
+        this.claw.init(hardwareMap);
         waitForStart();
         elapsedTime.reset();
 
 
+        // move toward the signal sleeve
+        this.adjustDrive();
+        while (opModeIsActive() && (this.scheduled_zone == 0) &&
+                (this.elapsedTime.seconds() < Constants.Time.autoTime)){
+            this.telemetry.addData("Status","Moving forward until close to sleeve");
+            this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.update();
+            if (!(sensor.Zone() == 0)) {
+                this.scheduled_zone = sensor.Zone();
+                this.drive.stop();
+            }
+        }
 
 
         // move forward more to adjust the position
@@ -65,14 +83,11 @@ public class EncoderSignalPark extends LinearOpMode {
         this.drive.disableEncoder();
 
 
+        // strafe
         this.runtime.reset();
-        while (runtime.milliseconds() < 1000) {
-            this.telemetry.addData("Status","Adjusting y-axis location");
-            this.telemetry.addData("Heading", this.navx.Heading());
-            this.telemetry.update();
-            this.drive.setStrafe(Constants.Auto.forwardPower, Constants.Auto.forwardPower);
+        while (opModeIsActive() && (this.runtime.milliseconds() > 2000)) {
+
         }
-        this.drive.stop();
 
     }
 

@@ -47,6 +47,10 @@ public class Lift {
         this.liftRight.setPower(0.0);
     }
 
+    public void set(double power) {
+        this.liftLeft.setPower(power);
+        this.liftRight.setPower(-power);
+    }
 
     // controller logic
     public void setControl(Gamepad gamepad) {
