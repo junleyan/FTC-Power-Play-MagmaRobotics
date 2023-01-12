@@ -61,25 +61,45 @@ public class EncoderAuto extends LinearOpMode {
         this.navx.init(hardwareMap);
         this.lift.init(hardwareMap);
         this.claw.init(hardwareMap);
+        this.drive.resetEncoder();
         waitForStart();
         elapsedTime.reset();
 
 
         this.claw.close();
-        this.lift.up();
         this.adjustDrive();
         this.runtime.reset();
-        while (opModeIsActive() && this.runtime.milliseconds() <= 750) {
+        while (opModeIsActive() && this.runtime.milliseconds() <= 250) {
             this.telemetry.addData("Status","Moving forward until close to sleeve");
             this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.addData("Heading", this.drive.Pos());
             this.telemetry.update();
         }
 
+
+        this.runtime.reset();
+        while (opModeIsActive() && this.runtime.milliseconds() <= 500) {
+            this.telemetry.addData("Status","Moving forward until close to sleeve");
+            this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.addData("Heading", this.drive.Pos());
+            this.telemetry.update();
+        }
+
+        this.drive.stop();
+        this.runtime.reset();
+        this.lift.up();
+        while (opModeIsActive() && this.runtime.milliseconds() <= 1000) {
+            this.telemetry.addData("Status","Lifting");
+            this.telemetry.update();
+        }
+
+        this.adjustDrive();
         // move toward the signal sleeve
         while (opModeIsActive() && (this.scheduled_zone == 0) &&
                 (this.elapsedTime.seconds() < Constants.Time.autoTime)){
             this.telemetry.addData("Status","Moving forward until close to sleeve");
             this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.addData("Heading", this.drive.Pos());
             this.telemetry.update();
             if (!(sensor.Zone() == 0)) {
                 this.scheduled_zone = sensor.Zone();
@@ -91,9 +111,9 @@ public class EncoderAuto extends LinearOpMode {
 
         // move forward more to adjust the position
         this.runtime.reset();
-        while (runtime.milliseconds() < 5000) {
+        while (this.drive.Pos() >= -2200) {
             this.telemetry.addData("Status","Adjusting y-axis location");
-            this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.addData("Heading", this.drive.Pos());
             this.telemetry.update();
             this.drive.setNormal(-Constants.Auto.forwardPower, -Constants.Auto.forwardPower);
         }
@@ -105,24 +125,82 @@ public class EncoderAuto extends LinearOpMode {
         this.lift.set(0.5);
         // strafe to score
         this.runtime.reset();
-        while (runtime.milliseconds() < 2000) {
+        while (runtime.milliseconds() < 1000) {
             this.telemetry.addData("Status","Adjusting y-axis location");
             this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.addData("Heading", this.drive.Pos());
             this.telemetry.update();
             this.drive.setStrafe(0.5, 0.5);
+        }
+
+        this.lift.stop();
+        this.drive.stop();
+        this.runtime.reset();
+        while (runtime.milliseconds() < 1000) {
+            this.telemetry.addData("Status","Adjusting y-axis location");
+            this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.addData("Heading", this.drive.Pos());
+            this.telemetry.update();
+        }
+
+        this.runtime.reset();
+        this.claw.open();
+        while (runtime.milliseconds() < 1000) {
+            this.telemetry.addData("Status","Adjusting y-axis location");
+            this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.addData("Heading", this.drive.Pos());
+            this.telemetry.update();
+        }
+        this.lift.up();
+
+        // final lift down
+        this.runtime.reset();
+        while (this.runtime.milliseconds() < 250 && this.elapsedTime.seconds() <= 25) {
+            this.lift.set(0.5);
+        }
+
+        this.runtime.reset();
+        while (this.runtime.milliseconds() < 250 && this.elapsedTime.seconds() <= 25) {
+            this.lift.set(0.3);
+        }
+
+        this.runtime.reset();
+        while (this.runtime.milliseconds() < 250 && this.elapsedTime.seconds() <= 25) {
+            this.lift.set(0.2);
+        }
+
+        this.runtime.reset();
+        while (this.runtime.milliseconds() < 250 && this.elapsedTime.seconds() <= 25) {
+            this.lift.set(0.0);
         }
 
 
         // strafe to score
         this.runtime.reset();
-        this.claw.open();
-        while (runtime.milliseconds() < 2000) {
+        while (runtime.milliseconds() < 1000) {
             this.telemetry.addData("Status","Adjusting y-axis location");
             this.telemetry.addData("Heading", this.navx.Heading());
             this.telemetry.update();
             this.drive.setStrafe(-0.5, -0.5);
         }
 
+
+        // adjust y pos
+        this.runtime.reset();
+        while (runtime.milliseconds() < 900) {
+            this.telemetry.addData("Status","Adjusting y-axis location");
+            this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.update();
+            this.drive.setNormal(-0.2, -0.2);
+        }
+
+        this.runtime.reset();
+        while (runtime.milliseconds() < 700) {
+            this.telemetry.addData("Status","Adjusting y-axis location");
+            this.telemetry.addData("Heading", this.navx.Heading());
+            this.telemetry.update();
+            this.drive.setNormal(0.2, 0.2);
+        }
 
 
         // route if zone is 3 or 1 | make 90 degree turn
@@ -139,7 +217,7 @@ public class EncoderAuto extends LinearOpMode {
 
         // move forward more to adjust position | move to wall
         this.runtime.reset();
-        while ((this.runtime.milliseconds() < 2000) &&
+        while ((this.runtime.milliseconds() < 2500) &&
                 (this.scheduled_zone == 3)) {
             telemetry.addData("Status","Adjusting x-axis location");
             telemetry.addData("Heading", this.navx.Heading());
@@ -152,7 +230,7 @@ public class EncoderAuto extends LinearOpMode {
         // route if zone is 1 | goes to zone 1
         this.runtime.reset();
         while ((this.scheduled_zone == 1) &&
-                (this.runtime.milliseconds() < 1500) &&
+                (this.runtime.milliseconds() < 1000) &&
                 (this.elapsedTime.seconds() < Constants.Time.autoTime)) {
             telemetry.addData("Status","Moving toward the left");
             telemetry.addData("Heading", navx.Heading());

@@ -27,6 +27,12 @@ public class Lift {
     }
 
 
+    public void disableBrake() {
+        this.liftLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        this.liftRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+    }
+
+
     // lift goes up
     public void up() {
         this.liftLeft.setPower(Constants.Lift.powerUp);

@@ -41,7 +41,7 @@ public class MecanumDrive {
 
 
     public void enableEncoder() {
-        this.leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void enableRunToPos() {
@@ -55,11 +55,12 @@ public class MecanumDrive {
 
 
     public void resetEncoder() {
-        this.leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public int Pos() {
-        return this.leftBack.getCurrentPosition();
+        return this.rightFront.getCurrentPosition();
     }
 
 
