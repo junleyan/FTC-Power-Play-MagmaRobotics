@@ -45,7 +45,6 @@ public class MainTeleopNoTimer extends OpMode {
         telemetry.addData("Color Blue", this.sensor.Blue());
         telemetry.addData("Measured Distance", this.sensor.Distance());
 
-
     }
 
 

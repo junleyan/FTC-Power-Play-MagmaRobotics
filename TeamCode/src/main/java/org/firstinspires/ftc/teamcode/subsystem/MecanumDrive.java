@@ -113,6 +113,7 @@ public class MecanumDrive {
 
     // controller logic
     public void setControl(Gamepad gamepad) {
+        this.disableEncoder();
         if (gamepad.left_bumper) {
             this.setStrafe(-0.5, -0.5);
         } else if (gamepad.right_bumper) {
