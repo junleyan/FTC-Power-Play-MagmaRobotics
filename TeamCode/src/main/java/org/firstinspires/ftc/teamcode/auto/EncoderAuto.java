@@ -200,24 +200,6 @@ public class EncoderAuto extends LinearOpMode {
         }
 
 
-        // adjust y pos
-        this.runtime.reset();
-        while (runtime.milliseconds() < 900) {
-            this.telemetry.addData("Status","Adjusting y-axis location");
-            this.telemetry.addData("Heading", this.navx.Heading());
-            this.telemetry.update();
-            this.drive.setNormal(-0.2, -0.2);
-        }
-
-        this.runtime.reset();
-        while (runtime.milliseconds() < 800) {
-            this.telemetry.addData("Status","Adjusting y-axis location");
-            this.telemetry.addData("Heading", this.navx.Heading());
-            this.telemetry.update();
-            this.drive.setNormal(0.2, 0.2);
-        }
-
-
         // route if zone is 3 or 1 | make 90 degree turn
         this.runtime.reset();
         while ((this.scheduled_zone == 3 || this.scheduled_zone == 1) &&
